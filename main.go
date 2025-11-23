@@ -1,20 +1,18 @@
 package main
 
 import (
-	"fyne.io/fyne/v2"
+	"fmt"
+
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/widget"
+)
 
 func main() {
-	// App erstellen
-	myApp := app.New()
-	myWindow := myApp.NewWindow("Meine erste Fyne App")
+	a := app.New()                  // neue Fyne-Anwendung erstellen
+	w := a.NewWindow("Hello World") // neues Fenster mit Titel
 
-	// Widget erstellen
-	hello := widget.NewLabel("Hallo Fyne!")
+	w.SetContent(widget.NewLabel("Hello World!")) // Label als Inhalt setzen
+	fmt.Println("Running")
 
-	// Widget im Fenster anzeigen
-	myWindow.SetContent(hello)
-
-	// Fenster größe setzen und anzeigen
-	myWindow.Resize(fyne.NewSize(400, 300))
-	myWindow.ShowAndRun()
+	w.ShowAndRun() // Fenster anzeigen und Anwendung starten
 }
