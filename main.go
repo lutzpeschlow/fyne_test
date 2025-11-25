@@ -12,20 +12,22 @@ import (
 func main() {
 	a := app.New()
 	w := a.NewWindow("Hello")
-	items := []string{"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10"}
+	items := []string{"Item 1", "Item 2", "Item 3", "Item 4",
+		"Item 5", "Item 6", "Item 7", "Item 8",
+		"Item 9", "Item 10"}
 	len_items := len(items)
-	fmt.Print(" number of items: ", len_items)
+	fmt.Print(" number of items: ", len_items, "\n")
 
+	// list := widget.NewList(lengthFunc, createItem, updateItem)
 	list := widget.NewList(
-		func() int {
-			return len(items)
-		},
-		func() fyne.CanvasObject {
-			return widget.NewLabel("")
-		},
+		func() int { return len(items) },
+		func() fyne.CanvasObject { return widget.NewLabel("") },
 		func(i widget.ListItemID, obj fyne.CanvasObject) {
 			obj.(*widget.Label).SetText(items[i])
 		})
+	list.OnSelected = func(id widget.ListItemID) {
+		fmt.Println(id, " - ", items[id])
+	}
 
 	scroll := container.NewVScroll(list)
 	w.SetContent(scroll)
